@@ -7,7 +7,7 @@ export function RouterMain() {
     <Routes>
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
-      <Route path="*" element={<h1>eita</h1>} />
+      <Route path="*" element={<Login />} />
     </Routes>
   );
 }
