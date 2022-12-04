@@ -11,12 +11,19 @@ body,#root{
     min-width: 380px;
     width: 100vw;
     max-width: 100%;
+
+    background-color: black;
+}
+
+#root{
+display: flex;
+flex-direction: column;
 }
 
 :root{
 
     --color-primary-1:#FF577F;
-    --color-primary-focus:#FF427F;
+    --color-primary-2:#FF427F;
     --color-primary-negative:#59323F;
     /* --color-secondary-2:#93D7AF;
     */
@@ -36,9 +43,9 @@ body,#root{
     --color-sucess:#3FE864;
     --color-information:#155BCB;
 
-    --font-title-1:700 1.625rem Inter, sans-serif;
-    --font-title-2:700 1.375rem Inter, sans-serif;
-    --font-title-3:700 1.125rem Inter, sans-serif;
+    --font-title-1:700 28px Inter, sans-serif;
+    --font-title-2:600 1.125rem Inter, sans-serif;
+    --font-title-3:500 1rem Inter, sans-serif;
     --font-headline:normal 0.75rem Inter, sans-serif;
     --font-headline-bold:bold 0.75rem Inter, sans-serif;
     --font-headline-italic:italic 0.75rem Inter, sans-serif;

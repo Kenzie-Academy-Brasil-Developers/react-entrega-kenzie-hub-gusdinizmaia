@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
 export const StyledLogin = styled.main`
+  width: 40%;
+
   .container__form {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
 
     width: 100%;

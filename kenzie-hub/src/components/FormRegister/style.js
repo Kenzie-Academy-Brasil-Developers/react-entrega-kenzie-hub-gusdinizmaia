@@ -1,11 +1,4 @@
 import styled from "styled-components";
+import { LoginBase } from "../FormLogin/style";
 
-export const RegisterBase = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
-
-  > label {
-  }
-`;
+export const RegisterBase = styled(LoginBase)``;

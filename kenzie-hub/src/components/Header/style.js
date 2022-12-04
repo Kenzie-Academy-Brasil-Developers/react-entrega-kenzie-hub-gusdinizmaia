@@ -3,9 +3,22 @@ import styled from "styled-components";
 export const HeaderBase = styled.header`
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  align-items: ${({ form }) => (form === "login" ? "center" : "space-between")};
+  justify-content: ${({ form }) =>
+    form === "login" ? "center" : "space-between"};
 
-  width: 100vw;
   height: 80px;
+
+  div {
+    h1 {
+      color: var(--color-primary-2);
+      font: var(--font-title-1);
+    }
+  }
+  nav {
+    a,
+    button {
+      cursor: pointer;
+    }
+  }
 `;

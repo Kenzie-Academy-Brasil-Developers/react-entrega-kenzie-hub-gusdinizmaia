@@ -1,11 +1,39 @@
-import { useForm } from "react-hook-form";
-import { RegisterBase } from "./style";
+import { StyledForm } from "../FormLogin/style";
+import { register, handleSubmit, useForm } from "react-hook-form";
+import { InputForm } from "../InputForm";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Button } from "../Button";
 
 export function FormRegister() {
-  const { register, handleSubmit } = useForm({});
+  const formRequired = yup.object().shape({
+    casa: yup.string().required("Email obrigatório"),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(formRequired),
+  });
+
+  function teste(data) {
+    console.log(data);
+  }
+
+  console.log(errors);
 
   return (
-    <RegisterBase action="" onSubmit={handleSubmit}>
+    <StyledForm action="" onSubmit={handleSubmit(teste)}>
+      <h2>Crie sua conta</h2>
+      <span>Rapido e grátis, vamos nessa</span>
+      <InputForm
+        text="Casa"
+        register={register}
+        property="casa"
+        errors={errors}
+      />
       <label htmlFor="">Email</label>
       <input type="text" {...register("email")} />
       <label htmlFor="">Nome</label>
@@ -20,9 +48,7 @@ export function FormRegister() {
       <input type="text" {...register("Bio")} />
       <label htmlFor="">Selecionar módulo</label>
       <input type="text" {...register("Selecionar módulo")} />
-      <button>Entrar</button>
-      <span>Ainda não possui uma conta?</span>
-      <button>Cadastre-se</button>
-    </RegisterBase>
+      <Button text="cadastrar" type="submit" model="primary-negative"></Button>
+    </StyledForm>
   );
 }

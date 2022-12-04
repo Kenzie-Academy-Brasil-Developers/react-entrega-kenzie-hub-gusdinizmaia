@@ -9,7 +9,6 @@ function App() {
     <React.Fragment>
       <GlobalStyles />
       <Reset />
-      <Header />
       <RouterMain />
     </React.Fragment>
   );

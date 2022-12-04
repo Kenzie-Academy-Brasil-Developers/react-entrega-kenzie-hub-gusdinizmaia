@@ -1,7 +1,9 @@
 import { useForm } from "react-hook-form";
-import { LoginBase } from "./style";
+import { StyledForm } from "./style";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Link } from "react-router-dom";
+import { Button } from "../Button";
 
 export function FormLogin() {
   const formRequired = yup.object().shape({
@@ -21,15 +23,18 @@ export function FormLogin() {
   }
 
   return (
-    <LoginBase action="" onSubmit={handleSubmit(onSubmitFunction)}>
+    <StyledForm action="" onSubmit={handleSubmit(onSubmitFunction)}>
+      <h2>Login</h2>
       <label htmlFor="">Email</label>
       <input type="text" {...register("email")} />
-      {}
+      {errors.email && errors.email.message}
       <label htmlFor="">Senha</label>
-      <input type="text" {...register("senha")} />
-      <button>Entrar</button>
+      <input placeholder="teste" type="text" {...register("senha")} />
+      <Button text="Entrar" model="primary" type="submit" />
       <span>Ainda não possui uma conta?</span>
-      <button>Cadastre-se</button>
-    </LoginBase>
+      <Link to={"/register"}>
+        <Button text="Cadastre-se" model="desability" />
+      </Link>
+    </StyledForm>
   );
 }
