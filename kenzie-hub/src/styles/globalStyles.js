@@ -13,12 +13,13 @@ body,#root{
     max-width: 100%;
 
     background-color: black;
+    color: var(--color-white);
 }
 
-#root{
+/* #root{
 display: flex;
 flex-direction: column;
-}
+} */
 
 :root{
 

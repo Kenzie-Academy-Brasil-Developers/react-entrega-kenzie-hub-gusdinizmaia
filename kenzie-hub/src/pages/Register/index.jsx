@@ -16,9 +16,9 @@ export function Register() {
 
   return (
     <React.Fragment>
-      <Header form="register" />
       <StyledRegister>
         <section class="container__form">
+          <Header form="register" />
           <FormRegister />
         </section>
       </StyledRegister>

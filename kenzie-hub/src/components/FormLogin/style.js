@@ -6,9 +6,7 @@ export const StyledForm = styled.form`
   align-items: flex-start;
   gap: 15px;
 
-  min-width: 300px;
-  width: 40%;
-  max-width: 350px;
+  width: 100%;
 
   padding: 30px;
   border-radius: var(--radius);
@@ -26,9 +24,15 @@ export const StyledForm = styled.form`
     font: var(--font-headline);
   }
 
-  input {
+  select {
+    color: var(--color-grey-1);
+  }
+
+  input,
+  select {
     border: 1px solid transparent;
     background-color: var(--color-grey-2);
+    color: var(--color-grey-0);
     border-radius: 4px;
     font: var(--font-title-3);
 

@@ -5,6 +5,7 @@ export const StyledButton = styled.button`
   padding: 10px 18px;
   border-radius: var(--radius);
 
+  cursor: pointer;
   color: var(--color-white);
 
   ${({ modelButton }) => {
@@ -19,7 +20,7 @@ export const StyledButton = styled.button`
           color: var(--color-white);
           background-color: var(--color-primary-1);
 
-          & :hover {
+          :hover {
             background-color: var(--color-primary-2);
           }
         `;
@@ -33,7 +34,7 @@ export const StyledButton = styled.button`
         return css`
           background-color: var(--color-grey-1);
 
-          & :hover {
+          :hover {
             background-color: var(--color-grey-2);
           }
         `;

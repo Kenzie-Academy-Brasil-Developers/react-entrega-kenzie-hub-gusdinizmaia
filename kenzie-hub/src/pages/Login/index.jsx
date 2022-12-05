@@ -11,9 +11,9 @@ export function Login() {
 
   return (
     <React.Fragment>
-      <Header form="login" />
       <StyledLogin>
         <section className="container__form">
+          <Header form="login" />
           <FormLogin />
         </section>
       </StyledLogin>

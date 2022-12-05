@@ -3,11 +3,13 @@ import styled from "styled-components";
 export const HeaderBase = styled.header`
   display: flex;
   flex-direction: row;
-  align-items: ${({ form }) => (form === "login" ? "center" : "space-between")};
+  /* align-items: ${({ form }) => (form === "login" ? "center" : "space-between")}; */
+  align-items: center;
   justify-content: ${({ form }) =>
     form === "login" ? "center" : "space-between"};
 
   height: 80px;
+  width: 100%;
 
   div {
     h1 {
