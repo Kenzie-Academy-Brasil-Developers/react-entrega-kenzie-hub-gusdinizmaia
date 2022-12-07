@@ -5,9 +5,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../Button";
 import { api } from "../../services/api";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
+import { RenderInputsForm } from "../RenderInputsForm";
+import { inputsLogin } from "../../database/inputsFormLogin";
+import { Loading } from "../Loading";
+import { useState } from "react";
 
 export function FormLogin() {
+  const [loading, setLoading] = useState(false);
+
   const formRequired = yup.object().shape({
     email: yup.string().required("Email obrigatório"),
     password: yup.string().required("Senha obrigatória"),
@@ -24,34 +30,40 @@ export function FormLogin() {
   });
 
   function postLogin(data) {
-    console.log(data);
+    setLoading(true);
 
     api
       .post("sessions", data)
       .then((resp) => {
         if (resp.status === 200) {
           window.localStorage.setItem("authToken", resp.data.token);
+          window.localStorage.setItem("userId", resp.data.user.id);
           toast.success("Conta logada com sucesso");
-          setTimeout(() => navigate("/home"), 2000);
+          setTimeout(() => navigate(`/home/${resp.data.user.id}`), 3000);
+        } else {
+          toast.error(resp.data.message);
+          setLoading(false);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setLoading(false);
+        toast.error(err.response.data.message);
+      });
   }
 
   return (
     <StyledForm action="" onSubmit={handleSubmit(postLogin)}>
       <h2>Login</h2>
-      <label htmlFor="">Email</label>
-      <input type="text" {...register("email")} />
-      {errors.email && errors.email.message}
-      <label htmlFor="">Senha</label>
-      <input placeholder="teste" type="text" {...register("password")} />
-      <Button text="Entrar" model="primary" type="submit" />
+      <RenderInputsForm array={inputsLogin} errors={errors} hook={register} />
+      <Button
+        text={loading ? <Loading /> : "Entrar"}
+        model="primary"
+        type="submit"
+      />
       <span>Ainda não possui uma conta?</span>
       <Link to={"/register"}>
         <Button text="Cadastre-se" model="desability" />
       </Link>
-      <ToastContainer />
     </StyledForm>
   );
 }

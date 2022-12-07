@@ -30,6 +30,7 @@ flex-direction: column;
     */
 
     --color-white:#FFFFFF;
+    --color-black:#000000;
 
     --color-grey-0:#F8F9FA;
     --color-grey-1:#868E96;

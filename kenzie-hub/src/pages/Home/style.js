@@ -5,6 +5,7 @@ export const StyledHome = styled.main`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin-top: 80px;
 
   min-height: calc(100vh - 80px);
 
@@ -17,6 +18,7 @@ export const StyledHome = styled.main`
   .container__user {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     h2 {
       font: var(--font-title-2);
@@ -37,4 +39,7 @@ export const StyledHome = styled.main`
 
 export const StyledHeader = styled(Header)`
   padding: 0 15%;
+
+  position: fixed;
+  top: 0;
 `;
