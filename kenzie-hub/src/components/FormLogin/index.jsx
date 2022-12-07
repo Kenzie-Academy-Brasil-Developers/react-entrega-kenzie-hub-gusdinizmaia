@@ -5,7 +5,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../Button";
 import { api } from "../../services/api";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
+import { RenderInputsForm } from "../RenderInputsForm";
+import { inputsLogin } from "../../database/inputsFormLogin";
 
 export function FormLogin() {
   const formRequired = yup.object().shape({
@@ -41,17 +43,12 @@ export function FormLogin() {
   return (
     <StyledForm action="" onSubmit={handleSubmit(postLogin)}>
       <h2>Login</h2>
-      <label htmlFor="">Email</label>
-      <input type="text" {...register("email")} />
-      {errors.email && errors.email.message}
-      <label htmlFor="">Senha</label>
-      <input placeholder="teste" type="text" {...register("password")} />
+      <RenderInputsForm array={inputsLogin} errors={errors} hook={register} />
       <Button text="Entrar" model="primary" type="submit" />
       <span>Ainda não possui uma conta?</span>
       <Link to={"/register"}>
         <Button text="Cadastre-se" model="desability" />
       </Link>
-      <ToastContainer />
     </StyledForm>
   );
 }

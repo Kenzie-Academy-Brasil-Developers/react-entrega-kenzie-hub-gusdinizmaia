@@ -3,8 +3,11 @@ import { Header } from "../../components/Header";
 import { StyledRegister } from "./style";
 import { api } from "../../services/api";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export function Register() {
+  const navigate = useNavigate();
+
   function getRegister() {
     api
       .get("users")
@@ -18,7 +21,7 @@ export function Register() {
     <React.Fragment>
       <StyledRegister>
         <section class="container__form">
-          <Header form="register" />
+          <Header form="register" redirection="/login" />
           <FormRegister />
         </section>
       </StyledRegister>

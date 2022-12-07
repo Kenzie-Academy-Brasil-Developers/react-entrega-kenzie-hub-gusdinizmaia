@@ -6,14 +6,27 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "../Button";
 import { api } from "../../services/api";
 import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { RenderInputsForm } from "../RenderInputsForm";
+import { InputsRegister } from "../../database/inputsFormRegister";
 
 export function FormRegister() {
   const formRequired = yup.object().shape({
-    email: yup.string().required("Email obrigatório"),
+    casa: yup.string().required("eita"),
+    email: yup.string().required("E-mail obrigatório").email("E-mail inválido"),
     name: yup.string().required("Nome obrigatório"),
-    password: yup.string().required("Senha obrigatório"),
+    password: yup
+      .string()
+      .required("Senha obrigatório")
+      .matches(
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+        "No minimo 8 caracteres, uma letra, um número e um símbolo"
+      ),
+    confirmPassword: yup
+      .string()
+      .required("Confirmação de senha obrigatória")
+      .oneOf([yup.ref("password")], "Senha incorreta"),
     bio: yup.string().required("Bio obrigatório"),
     contact: yup.string().required("Contato obrigatório"),
     course_module: yup.string().required("Selecionar o curso obrigatório"),
@@ -30,28 +43,32 @@ export function FormRegister() {
   });
 
   function postRegisterUser(data) {
-    console.log(data);
+    delete data.confirmPassword;
 
     api
       .post("users", data)
-      .then((resp) => console.log(resp))
-      .then((resp) =>
+      .then((resp) => {
         resp.status === 201
           ? navigate("/login")
           : toast(resp.data.message, {
               position: toast.POSITION.BOTTOM_RIGHT,
-            })
-      )
-      .catch((err) =>
+            });
+      })
+      .catch((err) => {
+        console.log(err);
         toast(err, {
           position: toast.POSITION.BOTTOM_RIGHT,
-        })
-      );
+        });
+      });
   }
 
+  //   const validate = yup.object().shape({});
+
+  // const {validate, validateState:{errors1}} = useForm({
+
+  // })
   return (
     <StyledForm action="" onSubmit={handleSubmit(postRegisterUser)}>
-      <ToastContainer />
       <h2>Crie sua conta</h2>
       <span>Rapido e grátis, vamos nessa</span>
       {/* <InputForm
@@ -60,7 +77,12 @@ export function FormRegister() {
         property="casa"
         errors={errors}
       /> */}
-      <label htmlFor="">Email</label>
+      <RenderInputsForm
+        array={InputsRegister}
+        hook={register}
+        errors={errors}
+      />
+      {/* <label htmlFor="">Email</label>
       <input
         placeholder="Digite aqui seu email"
         type="text"
@@ -76,11 +98,18 @@ export function FormRegister() {
       <label htmlFor="">Senha</label>
       <input
         placeholder="Digite aqui sua senha"
-        type="text"
+        type="password"
         {...register("password")}
       />
+      {errors.password?.message}
+
       <label htmlFor="">Confirmar Senha</label>
-      <input placeholder="Digite aqui novamente sua senha" type="text" />
+      <input
+        placeholder="Digite aqui novamente sua senha"
+        type="text"
+        {...register("confirmPassword")}
+      />
+      {errors.confirmPassword?.message}
       <label htmlFor="">Contato</label>
       <input
         placeholder="Opção de contato"
@@ -88,7 +117,8 @@ export function FormRegister() {
         {...register("contact")}
       />
       <label htmlFor="">Bio</label>
-      <input placeholder="Fale sobre você" type="text" {...register("bio")} />
+      <input placeholder="Fale sobre você" type="text" {...register("bio")} /> */}
+      <label htmlFor="">Selecionar módulo</label>
       <select {...register("course_module")}>
         <option value="" disabled selected>
           Escolha módulo

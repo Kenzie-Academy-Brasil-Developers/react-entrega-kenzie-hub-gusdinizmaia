@@ -12,6 +12,7 @@ export function Home() {
           Authorization: `Bearer ${window.localStorage.getItem("authToken")}`,
         },
       };
+      console.log(myHeaders);
 
       const user = api
         .get("profile", myHeaders)
@@ -27,7 +28,7 @@ export function Home() {
     <React.Fragment>
       <StyledHeader
         redirection="/login"
-        buttonCallback={window.localStorage.clear()}
+        buttonCallback={(e) => window.localStorage.clear()}
       />
       <StyledHome>
         <section className="container__user">
