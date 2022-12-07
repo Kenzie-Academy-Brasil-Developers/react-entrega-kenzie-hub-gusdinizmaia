@@ -1,6 +1,5 @@
 import { StyledForm } from "../FormLogin/style";
 import { useForm } from "react-hook-form";
-import { InputForm } from "../InputForm";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "../Button";
@@ -10,10 +9,10 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { RenderInputsForm } from "../RenderInputsForm";
 import { InputsRegister } from "../../database/inputsFormRegister";
+import { Error } from "../Error";
 
 export function FormRegister() {
   const formRequired = yup.object().shape({
-    casa: yup.string().required("eita"),
     email: yup.string().required("E-mail obrigatório").email("E-mail inválido"),
     name: yup.string().required("Nome obrigatório"),
     password: yup
@@ -50,9 +49,7 @@ export function FormRegister() {
       .then((resp) => {
         resp.status === 201
           ? navigate("/login")
-          : toast(resp.data.message, {
-              position: toast.POSITION.BOTTOM_RIGHT,
-            });
+          : toast.success(resp.data.message);
       })
       .catch((err) => {
         console.log(err);
@@ -62,62 +59,17 @@ export function FormRegister() {
       });
   }
 
-  //   const validate = yup.object().shape({});
+  console.log(errors);
 
-  // const {validate, validateState:{errors1}} = useForm({
-
-  // })
   return (
     <StyledForm action="" onSubmit={handleSubmit(postRegisterUser)}>
       <h2>Crie sua conta</h2>
       <span>Rapido e grátis, vamos nessa</span>
-      {/* <InputForm
-        text="Casa"
-        register={register}
-        property="casa"
-        errors={errors}
-      /> */}
       <RenderInputsForm
         array={InputsRegister}
         hook={register}
         errors={errors}
       />
-      {/* <label htmlFor="">Email</label>
-      <input
-        placeholder="Digite aqui seu email"
-        type="text"
-        {...register("email")}
-      />
-      {errors.email?.message}
-      <label htmlFor="">Nome</label>
-      <input
-        placeholder="Digite aqui seu nome"
-        type="text"
-        {...register("name")}
-      />
-      <label htmlFor="">Senha</label>
-      <input
-        placeholder="Digite aqui sua senha"
-        type="password"
-        {...register("password")}
-      />
-      {errors.password?.message}
-
-      <label htmlFor="">Confirmar Senha</label>
-      <input
-        placeholder="Digite aqui novamente sua senha"
-        type="text"
-        {...register("confirmPassword")}
-      />
-      {errors.confirmPassword?.message}
-      <label htmlFor="">Contato</label>
-      <input
-        placeholder="Opção de contato"
-        type="text"
-        {...register("contact")}
-      />
-      <label htmlFor="">Bio</label>
-      <input placeholder="Fale sobre você" type="text" {...register("bio")} /> */}
       <label htmlFor="">Selecionar módulo</label>
       <select {...register("course_module")}>
         <option value="" disabled selected>
@@ -135,7 +87,8 @@ export function FormRegister() {
         <option value="Primeiro módulo (Introdução ao Frontend)">
           Quarto módulo (Backend Avançado)
         </option>
-      </select>
+      </select>{" "}
+      {errors.course_module && <Error message={errors.course_module.message} />}
       <Button text="cadastrar" type="submit" model="primary-negative"></Button>
     </StyledForm>
   );

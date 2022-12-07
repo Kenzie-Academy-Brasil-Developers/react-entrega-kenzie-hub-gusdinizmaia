@@ -4,6 +4,8 @@ export const StyledButton = styled.button`
   font: var(--font-title-3);
   padding: 10px 18px;
   border-radius: var(--radius);
+  display: flex;
+  justify-content: center;
 
   cursor: pointer;
   color: var(--color-white);

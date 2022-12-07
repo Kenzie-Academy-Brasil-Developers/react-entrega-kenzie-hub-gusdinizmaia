@@ -1,19 +1,27 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { api } from "../../services/api";
 import { StyledHeader, StyledHome } from "./style";
 
 export function Home() {
   const [user, setUser] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     function getUser() {
+      let token = window.localStorage.getItem("authToken");
+
+      if (!token) {
+        navigate("/login");
+        toast.error("Nenhum usuário conectado");
+      }
+
       const myHeaders = {
         headers: {
-          Authorization: `Bearer ${window.localStorage.getItem("authToken")}`,
+          Authorization: `Bearer ${token}`,
         },
       };
-      console.log(myHeaders);
-
       const user = api
         .get("profile", myHeaders)
         .then((resp) => setUser(resp.data))
