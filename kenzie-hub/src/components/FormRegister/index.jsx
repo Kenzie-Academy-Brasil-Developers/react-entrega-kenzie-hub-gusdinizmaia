@@ -47,19 +47,16 @@ export function FormRegister() {
     api
       .post("users", data)
       .then((resp) => {
-        resp.status === 201
-          ? navigate("/login")
-          : toast.success(resp.data.message);
+        if (resp.status === 201) {
+          toast.success("Conta cadastrada com sucesso");
+          return navigate("/login");
+        }
+        return toast.error(resp.data.message);
       })
       .catch((err) => {
-        console.log(err);
-        toast(err, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-        });
+        toast.error(err.response.data.message);
       });
   }
-
-  console.log(errors);
 
   return (
     <StyledForm action="" onSubmit={handleSubmit(postRegisterUser)}>
