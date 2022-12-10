@@ -1,3 +1,4 @@
+import { MdAdd } from "react-icons/md";
 import styled from "styled-components";
 import { Header } from "../../components/Header";
 
@@ -30,16 +31,34 @@ export const StyledHome = styled.main`
     }
   }
 
-  .container__undefined {
+  .container__techs {
     display: flex;
     flex-direction: column;
     gap: 20px;
+
+    > div {
+      display: flex;
+      justify-content: space-between;
+      h2 {
+        font-size: var(--font-title-3);
+      }
+    }
   }
 `;
 
+export const StyledAdd = styled(MdAdd)`
+  font-size: 1rem;
+  cursor: pointer;
+`;
 export const StyledHeader = styled(Header)`
   padding: 0 15%;
 
   position: fixed;
   top: 0;
+`;
+
+export const StyledListTechs = styled.ul`
+  padding: 25px;
+  border-radius: var(--radius);
+  background-color: var(--color-grey-3);
 `;

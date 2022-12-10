@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../../services/api";
-import { StyledHeader, StyledHome } from "./style";
+import { StyledAdd, StyledHeader, StyledHome, StyledListTechs } from "./style";
+import { Cards } from "../../components/Cards";
+import { ModalCreateTech } from "../../components/ModalCreateTech";
 
 export function Home() {
   const [user, setUser] = useState();
   const navigate = useNavigate();
+  const [modalTech, setModalTech] = useState(false);
 
   useEffect(() => {
     function getUser() {
@@ -43,13 +46,24 @@ export function Home() {
           <h2>Olá, {user?.name}</h2>
           <h3>{user?.course_module}</h3>
         </section>
-        <section className="container__undefined">
-          <h2>Que pena! Estamos em desenvolvimento :(</h2>
-          <h3>
-            Nossa aplicação está em desenvolvimento, em breve teremos novidades
-          </h3>
+        <section className="container__techs">
+          <div>
+            <h2>Tecnologias</h2>
+            <StyledAdd onClick={(e) => setModalTech(true)} />
+          </div>
+          <StyledListTechs>
+            {[
+              {
+                title: "React",
+                status: "Iniciante",
+              },
+            ].map((elem, index) => (
+              <Cards key={index} name={elem.title} status={elem.status} />
+            ))}
+          </StyledListTechs>
         </section>
       </StyledHome>
+      {modalTech && <ModalCreateTech closeModal={setModalTech} />}
     </React.Fragment>
   );
 }
