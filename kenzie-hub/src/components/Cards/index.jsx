@@ -1,11 +1,11 @@
 import { MdDelete } from "react-icons/md";
 import { StyledCard, StyledDelete } from "./style";
-export function Cards({ name, status }) {
+export function Cards({ name, status, callback, id, elem }) {
   return (
     <StyledCard>
       <h3>{name}</h3>
       <p>{status}</p>
-      <StyledDelete />
+      <StyledDelete onClick={(e) => callback(id)} />
     </StyledCard>
   );
 }

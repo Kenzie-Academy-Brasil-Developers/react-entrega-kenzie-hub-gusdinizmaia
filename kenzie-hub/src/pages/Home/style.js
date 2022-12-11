@@ -11,7 +11,7 @@ export const StyledHome = styled.main`
   min-height: calc(100vh - 80px);
 
   section {
-    padding: 40px 15%;
+    padding: 30px 15%;
     width: 100%;
     border-top: solid 1.5px var(--color-grey-4);
   }
@@ -34,7 +34,9 @@ export const StyledHome = styled.main`
   .container__techs {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
+
+    height: 460px;
 
     > div {
       display: flex;
@@ -61,4 +63,10 @@ export const StyledListTechs = styled.ul`
   padding: 25px;
   border-radius: var(--radius);
   background-color: var(--color-grey-3);
+
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 `;

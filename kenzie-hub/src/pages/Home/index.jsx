@@ -33,7 +33,20 @@ export function Home() {
       return user;
     }
     getUser();
-  }, []);
+  }, [user]);
+
+  function deleteTech(data) {
+    let token = window.localStorage.getItem("authToken");
+
+    api
+      .delete(`users/techs/${data}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((resp) => resp.data)
+      .catch((err) => console.log(err));
+  }
 
   return (
     <React.Fragment>
@@ -52,13 +65,14 @@ export function Home() {
             <StyledAdd onClick={(e) => setModalTech(true)} />
           </div>
           <StyledListTechs>
-            {[
-              {
-                title: "React",
-                status: "Iniciante",
-              },
-            ].map((elem, index) => (
-              <Cards key={index} name={elem.title} status={elem.status} />
+            {user?.techs.map((elem, index) => (
+              <Cards
+                key={index}
+                name={elem.title}
+                callback={deleteTech}
+                status={elem.status}
+                id={elem.id}
+              />
             ))}
           </StyledListTechs>
         </section>

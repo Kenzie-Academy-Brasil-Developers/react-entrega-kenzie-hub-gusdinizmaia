@@ -7,7 +7,6 @@ body{
 }
 
 body,#root{
-    min-height: 100vh;
     min-width: 380px;
     width: 100vw;
     max-width: 100%;
