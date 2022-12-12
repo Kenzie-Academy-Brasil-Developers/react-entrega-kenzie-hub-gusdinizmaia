@@ -6,6 +6,7 @@ export const StyledCard = styled.li`
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
+  cursor: pointer;
 
   position: relative;
 

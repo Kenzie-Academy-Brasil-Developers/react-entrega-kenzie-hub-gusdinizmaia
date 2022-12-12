@@ -20,15 +20,10 @@ export const StyledForm = styled.form`
     padding-bottom: 10px;
   }
 
-  label {
-    font: var(--font-headline);
-  }
-
   select {
     color: var(--color-grey-1);
   }
 
-  input,
   select {
     border: 1px solid transparent;
     background-color: var(--color-grey-2);

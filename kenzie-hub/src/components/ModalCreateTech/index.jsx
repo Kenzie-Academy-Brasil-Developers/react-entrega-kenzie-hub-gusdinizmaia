@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-export function ModalCreateTech({ closeModal }) {
+export function ModalCreateTech({ closeModal, callback }) {
   const formRequired = yup.object().shape({
     title: yup.string().required("A tecnologia requer um nome"),
     status: yup.string().required("A tecnologia requer status"),
@@ -20,21 +20,6 @@ export function ModalCreateTech({ closeModal }) {
     resolver: yupResolver(formRequired),
   });
 
-  function teste(data) {
-    console.log(data);
-  }
-
-  function postTech(data) {
-    api
-      .post("users/techs", data, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-        },
-      })
-      .then((resp) => console.log(resp))
-      .catch((err) => console.log(err.response.data.message));
-  }
-
   return (
     <StyledWrapper>
       <StyledForm>
@@ -42,13 +27,13 @@ export function ModalCreateTech({ closeModal }) {
           <h4>Cadastrar Tecnologia</h4>
           <StyledClose onClick={(e) => closeModal(false)} />
         </div>
-        <form onSubmit={handleSubmit(postTech)} action="">
+        <form onSubmit={handleSubmit(callback)} action="">
           <InputForm
             text="Nome"
             property="title"
             register={register}
             errors={errors}
-          />{" "}
+          />
           <label htmlFor="">Selecionar status</label>
           <select {...register("status")} name="" id="">
             <option value="Iniciante">Iniciante</option>

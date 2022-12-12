@@ -28,15 +28,18 @@ export const StyledForm = styled.div`
   background-color: var(--color-grey-2);
   border-radius: var(--radius);
 
+  min-width: 300px;
   > div {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding: 20px;
+    gap: 20px;
+    border-radius: 6px 6px 0 0;
 
     position: relative;
 
-    background-color: var(--color-grey-3);
+    background-color: var(--color-grey-2);
     h4 {
     }
   }
@@ -48,5 +51,25 @@ export const StyledForm = styled.div`
     padding: 20px;
 
     width: 100%;
+    background-color: var(--color-grey-3);
+
+    select {
+      border: 1px solid transparent;
+      background-color: var(--color-grey-2);
+      color: var(--color-grey-0);
+      border-radius: 4px;
+      font: var(--font-title-3);
+
+      width: 100%;
+      padding: 10px 16px;
+
+      ::placeholder {
+      }
+      :focus {
+        color: var(--color-grey-0);
+        border: 1px solid var(--color-grey-0);
+        background-color: var(--color-grey-2);
+      }
+    }
   }
 `;

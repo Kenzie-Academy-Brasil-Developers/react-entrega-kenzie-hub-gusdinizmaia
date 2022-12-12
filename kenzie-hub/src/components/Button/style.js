@@ -16,6 +16,10 @@ export const StyledButton = styled.button`
         return css`
           background-color: var(--color-grey-3);
         `;
+      case "grey-2":
+        return css`
+          background-color: var(--color-grey-2);
+        `;
 
       case "primary":
         return css`

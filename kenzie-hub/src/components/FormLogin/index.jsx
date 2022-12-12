@@ -4,15 +4,17 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../Button";
-import { api } from "../../services/api";
-import { toast } from "react-toastify";
 import { RenderInputsForm } from "../RenderInputsForm";
 import { inputsLogin } from "../../database/inputsFormLogin";
 import { Loading } from "../Loading";
 import { useState } from "react";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
+import { useEffect } from "react";
 
 export function FormLogin() {
   const [loading, setLoading] = useState(false);
+  const { postLogin } = useContext(UserContext);
 
   const formRequired = yup.object().shape({
     email: yup.string().required("Email obrigatório"),
@@ -29,27 +31,14 @@ export function FormLogin() {
     resolver: yupResolver(formRequired),
   });
 
-  function postLogin(data) {
-    setLoading(true);
+  useEffect(() => {
+    const token = window.localStorage.getItem("authToken");
+    const userId = window.localStorage.getItem("userId");
 
-    api
-      .post("sessions", data)
-      .then((resp) => {
-        if (resp.status === 200) {
-          window.localStorage.setItem("authToken", resp.data.token);
-          window.localStorage.setItem("userId", resp.data.user.id);
-          toast.success("Conta logada com sucesso");
-          setTimeout(() => navigate(`/home/${resp.data.user.id}`), 3000);
-        } else {
-          toast.error(resp.data.message);
-          setLoading(false);
-        }
-      })
-      .catch((err) => {
-        setLoading(false);
-        toast.error(err.response.data.message);
-      });
-  }
+    if (token) {
+      navigate(`/home/${userId}`);
+    }
+  });
 
   return (
     <StyledForm action="" onSubmit={handleSubmit(postLogin)}>
