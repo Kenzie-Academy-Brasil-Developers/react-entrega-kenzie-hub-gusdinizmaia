@@ -36,4 +36,10 @@ export const StyledDelete = styled(MdDelete)`
   color: var(--color-white);
   font-size: 1.125rem;
   cursor: pointer;
+
+  :hover {
+    transition: 0.25s;
+    background-color: var(--color-primary-negative);
+    border-radius: 2px;
+  }
 `;

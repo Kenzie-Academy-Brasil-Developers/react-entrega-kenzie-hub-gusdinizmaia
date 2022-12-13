@@ -7,28 +7,16 @@ import { Cards } from "../../components/Cards";
 import { ModalCreateTech } from "../../components/ModalCreateTech";
 import { UserContext } from "../../contexts/UserContext";
 import { ModalEditTech } from "../../components/ModalEditTech";
+import { ApiTechsContext } from "../../contexts/ApiTechsContext";
 
 export function Home() {
   const [modalTech, setModalTech] = useState(false);
   const { user } = useContext(UserContext);
-  const [idTech, setIdTech] = useState(false);
-
-  function deleteTech(data) {
-    api
-      .delete(`users/techs/${data}`)
-      .then((resp) => resp.data)
-      .catch((err) => console.log(err));
-  }
-  function postTech(data) {
-    api
-      .post("users/techs", data)
-      .then((resp) => console.log(resp))
-      .catch((err) => console.log(err.response.data.message));
-  }
+  const [itemTech, setItemTech] = useState(null);
+  const { deleteTech, postTech } = useContext(ApiTechsContext);
 
   return (
     <React.Fragment>
-      {/* <ProtectUser /> */}
       <StyledHeader
         redirection="/login"
         buttonCallback={(e) => window.localStorage.clear()}
@@ -50,10 +38,10 @@ export function Home() {
                 name={elem.title}
                 status={elem.status}
                 id={elem.id}
+                deleteItem={deleteTech}
+                modalEdit={setModalTech}
+                editItem={setItemTech}
                 elem={elem}
-                callback={deleteTech}
-                editTech={setModalTech}
-                callbackEdit={setIdTech}
               />
             ))}
           </StyledListTechs>
@@ -63,7 +51,7 @@ export function Home() {
         <ModalCreateTech callback={postTech} closeModal={setModalTech} />
       )}
       {modalTech === "edit" && (
-        <ModalEditTech elem={idTech} closeModal={setModalTech} />
+        <ModalEditTech elem={itemTech} closeModal={setModalTech} />
       )}
     </React.Fragment>
   );

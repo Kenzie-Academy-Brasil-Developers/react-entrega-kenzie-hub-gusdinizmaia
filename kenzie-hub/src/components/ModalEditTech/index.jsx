@@ -6,9 +6,12 @@ import { StyledFormEdit } from "./style";
 import { Button } from "../Button";
 import { InputForm } from "../InputForm";
 import { Error } from "../Error";
-import { api } from "../../services/api";
+import { useContext } from "react";
+import { ApiTechsContext } from "../../contexts/ApiTechsContext";
 
 export function ModalEditTech({ closeModal, callback, elem }) {
+  const { putTech } = useContext(ApiTechsContext);
+
   const formRequired = yup.object().shape({
     title: yup.string().required("A tecnologia requer um nome"),
     status: yup.string().required("A tecnologia requer status"),
@@ -20,15 +23,6 @@ export function ModalEditTech({ closeModal, callback, elem }) {
   } = useForm({
     resolver: yupResolver(formRequired),
   });
-
-  function putTech(data) {
-    console.log(errors, register, data, elem.id);
-
-    api
-      .put(`users/techs/${elem.id}`, data)
-      .then((resp) => console.log(resp.data))
-      .catch((err) => console.log(err));
-  }
 
   return (
     <StyledWrapper>
@@ -47,10 +41,9 @@ export function ModalEditTech({ closeModal, callback, elem }) {
           />
           <label htmlFor="">Selecionar status</label>
           <select
+            defaultValue=""
             onChange={(e) => e.target.value}
             {...register("status")}
-            name=""
-            id=""
           >
             <option value="Iniciante">Iniciante</option>
             <option value="Intermediário">Intermediário</option>

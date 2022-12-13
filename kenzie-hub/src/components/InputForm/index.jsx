@@ -12,7 +12,7 @@ export function InputForm({ text, property, register, errors, desa, value }) {
         type={propertyType.includes("password") ? "password" : "text"}
         {...register(property)}
         // readOnly={desa ? "readonly" : ""}
-        value={value ? value : ""}
+        value={value ? value : undefined}
       />
       {errors[property] ? <Error message={errors[property].message} /> : ""}
     </React.Fragment>

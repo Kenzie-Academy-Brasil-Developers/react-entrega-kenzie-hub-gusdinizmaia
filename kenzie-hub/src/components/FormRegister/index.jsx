@@ -68,7 +68,7 @@ export function FormRegister() {
         errors={errors}
       />
       <label htmlFor="">Selecionar módulo</label>
-      <select {...register("course_module")}>
+      <select defaultValue="" {...register("course_module")}>
         <option value="" disabled selected>
           Escolha módulo
         </option>

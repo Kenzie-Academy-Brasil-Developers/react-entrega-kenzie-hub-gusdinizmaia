@@ -35,8 +35,10 @@ export function ModalCreateTech({ closeModal, callback }) {
             errors={errors}
           />
           <label htmlFor="">Selecionar status</label>
-          <select {...register("status")} name="" id="">
-            <option value="Iniciante">Iniciante</option>
+          <select defaultValue="" {...register("status")}>
+            <option selected value="Iniciante">
+              Iniciante
+            </option>
             <option value="Intermediário">Intermediário</option>
             <option value="Avançado">Avançado</option>
           </select>
