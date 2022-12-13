@@ -33,10 +33,9 @@ export function FormLogin() {
 
   useEffect(() => {
     const token = window.localStorage.getItem("authToken");
-    const userId = window.localStorage.getItem("userId");
 
     if (token) {
-      navigate(`/home/${userId}`);
+      navigate(`/home`);
     }
   });
 

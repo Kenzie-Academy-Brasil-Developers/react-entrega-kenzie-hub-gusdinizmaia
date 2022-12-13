@@ -9,8 +9,8 @@ export function RouterMain() {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/home/" element={<ProtectUser />}>
-        <Route path=":id" element={<Home />} />
+      <Route path="/home" element={<ProtectUser />}>
+        <Route path="" element={<Home />} />
       </Route>
       <Route path="*" element={<Navigate to={"login"} />} />
     </Routes>

@@ -53,7 +53,7 @@ export function UserProvider({ children }) {
           setUser(resp.data.user);
 
           toast.success("Conta logada com sucesso");
-          setTimeout(() => navigate(`/home/${resp.data.user.id}`), 3000);
+          setTimeout(() => navigate(`/home`), 3000);
         } else {
           toast.error(resp.data.message);
           setLoading(false);
